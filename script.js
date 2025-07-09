@@ -1,26 +1,45 @@
+// Create a button to trigger the sum calculation
 const getSumBtn = document.createElement("button");
 getSumBtn.append("Get Total Price");
 document.body.appendChild(getSumBtn);
 
+// Function to calculate the total price
 const getSum = () => {
-  const priceElements = document.querySelectorAll(".price");
+  // Get all the price elements from the table
+  const prices = document.querySelectorAll(".price");
+
+  // Initialize a variable to hold the total sum of prices
   let total = 0;
 
-  priceElements.forEach(priceEl => {
-    total += parseFloat(priceEl.textContent);
+  // Loop through each price element, convert the text to a number, and add it to the total
+  prices.forEach(price => {
+    total += parseFloat(price.textContent);  // Convert text content to number (float)
   });
 
-  // Create new table row
-  const newRow = document.createElement("tr");
+  // Create a new table row for the total price
+  const totalRow = document.createElement("tr");
+
+  // Create a cell for the "Total Price" label and add it to the row
+  const labelCell = document.createElement("td");
+  labelCell.textContent = "Total Price";  // Set the label for the total row
+  totalRow.appendChild(labelCell);
+
+  // Create a cell for the total value and add it to the row
   const totalCell = document.createElement("td");
-  totalCell.setAttribute("colspan", "2");
-  totalCell.textContent = `Total Price: Rs ${total}`;
+  totalCell.textContent = total;  // Display the calculated total sum
+  totalRow.appendChild(totalCell);
 
-  newRow.appendChild(totalCell);
+  // Assign the ID "ans" to the new row
+  totalRow.id = "ans";
 
-  // Append the row to the table
+  // Append the new row to the table
   const table = document.querySelector("table");
-  table.appendChild(newRow);
+  table.appendChild(totalRow);
+
+	getSumBtn.removeEventListener("click", getSum); // Remove the event listener to
+  document.removeChild(getSumBtn); 
+	
 };
 
+// Add an event listener to the "Get Total Price" button to trigger the getSum function
 getSumBtn.addEventListener("click", getSum);
