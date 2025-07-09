@@ -37,7 +37,7 @@ const getSum = () => {
   table.appendChild(totalRow);
 
 	getSumBtn.removeEventListener("click", getSum); // Remove the event listener to
-  document.removeChild(getSumBtn); 
+  getSumBtn.remove();
 	
 };
 
